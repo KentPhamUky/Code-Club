@@ -9,8 +9,8 @@
 #The following script is meant to run with the provided axes and metadata file named "NMDS.axes" and "metadata.xlsx"
 
 
-library(tidyverse) #Used for ggplot2
-library(readxl) #Used to read in metadata and axes file
+library(tidyverse) #Used for ggplot2 and to read in tsv file
+library(readxl) #Used to read in metadata file
 library(broom) #Used to tidy data outputs
 library(plyr) #Used to group data
 
