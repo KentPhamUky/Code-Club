@@ -1,10 +1,10 @@
-#Script Name: One-way ANOVA
+#Script Name: Bar Graph
 #Last Author: Kent P.
-#Last Edit Date: 14Dec2022
+#Last Edit Date: 3Jan2023
 
-#bar chart template with ggplot2 (dataset = name of your dataset; X = Independent variable, Y= Dependent variable)
+#Bar chart template with ggplot2 (dataset = name of your dataset; X = Independent variable, Y= Dependent variable)
 
-library(ggplot2)
+library(tidyverse)
 plot <- ggplot(data=dataset, aes(x = X, y = Y, color = X, fill = X)) + #Assign your dataset and variables to ggplot. Can change color/fill for a second factor. Can use hexadecimal code for color ie blue = #0000FF
   geom_bar(stat="identity", width = 1, position = position_dodge()) + #Create a bar plot and set bar width. Remove", position = position_dodge()" to create stacked bar chart or when only 1 factor
   theme(legend.position = "top") +
@@ -26,7 +26,7 @@ plot <- ggplot(data=dataset, aes(x = X, y = Y, color = X, fill = X)) + #Assign y
   
   
 #Example plot
-library(ggplot2) #load in ggplot2
+library(tidyverse) #load in ggplot2 through tidyverse
 data(PlantGrowth) #example dataset
 
   
