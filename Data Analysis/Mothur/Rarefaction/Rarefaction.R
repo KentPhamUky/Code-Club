@@ -5,7 +5,6 @@
 #This script is used to interpret the rarefaction file output by mothur
 
 library(tidyverse) #For reading in summary file and ggplot2
-library(dplyr) #For Processing dataset
 library(reshape2) #For converting rarefaction dataset into tall format
 
 setwd("C:/Users/kdph224/Documents/GitHub/Code-Club/Data Analysis/Mothur/Rarefaction") #Change to your working directory where files are stored
