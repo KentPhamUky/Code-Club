@@ -125,20 +125,77 @@ class_summary%>%
 write.csv(class_summary, 
           file = 'C:/Users/User/Documents/School Documents/FTF/Analysis/Data Files/Recruit.csv')
 #Recruitment Analysis----
+
+class_summary = read.csv(file = 'C:/Users/kdph224/Documents/GitHub/Code-Club/InProgress_NeedHelp/Recruit.csv', 
+                   header = T)
+
 year12df <- subset(class_summary, Year == "2022")
 year6df <-subset(class_summary, Year == "2016")
 year1df <-subset(class_summary, Year == "2011")
 
-output_df = data.frame(Plot = rep(NA), Group = rep(NA), DBH_Class = rep(NA), total.Density = rep(NA), CBI = rep(NA))
+output_df = data.frame(Plot = rep(NA), Group = rep(NA), DBH_Class = rep(NA), CBI = rep(NA), recruit.Density = rep(NA))
 
-for(i in length(year12df)){
-   if((year12df$Plot[i] == year6df$Plot[i]) & (year12df$Group[i] == year6df$Group[i]) & (year12df$DBH_Class[i] == year6df$DBH_Class[i]))
+
+
+
+
+#same for 3
+
+
+
+
+year12df$Plot = as.factor(year12df$Plot)
+
+for(i in 1:nrow(year12df)){
+  plots = year12df$Plot[i]
+  group = year12df$Group[i]
+  class = year12df$DBH_Class[i]
+  cbi = year12df$CBI[i]
+
+  sub6 <- subset(year6df, Plot == plots & Group == group & DBH_Class == class)
+  
+    if (nrow(sub6) == 1 )
     {
-     recruit.Density = year12df$total.Density - year6df$total.Density
+      tempval = year12df$total.Density[i] - sub6$total.Density[1]
+      temp_df = data.frame(Plot = plots, Group = group, DBH_Class = class, CBI = cbi, recruit.Density = tempval)
+      output_df = rbind(output_df, temp_df)
     }
-   temp = cbind(recruit.Density, output_df)
+    else 
+    {
+      tempval = year12df$total.Density[i]
+      temp_df = data.frame(Plot = plots, Group = group, DBH_Class = class, CBI = cbi, recruit.Density = tempval)
+      output_df = rbind(output_df, temp_df)
+    }
+      
 }
+  
 
+#Recruitment over 12 years 
+year12df$Plot = as.factor(year12df$Plot)
+
+output_df2 = data.frame(Plot = rep(NA), Group = rep(NA), DBH_Class = rep(NA), CBI = rep(NA), recruit.Density = rep(NA))
+for(i in 1:nrow(year12df)){
+  plots = year12df$Plot[i]
+  group = year12df$Group[i]
+  class = year12df$DBH_Class[i]
+  cbi = year12df$CBI[i]
+  
+  sub1 <- subset(year1df, Plot == plots & Group == group & DBH_Class == class)
+  
+  if (nrow(sub1) == 1 )
+  {
+    tempval = year12df$total.Density[i] - sub1$total.Density[1]
+    temp_df = data.frame(Plot = plots, Group = group, DBH_Class = class, CBI = cbi, recruit.Density = tempval)
+    output_df2 = rbind(output_df2, temp_df)
+  }
+  else 
+  {
+    tempval = year12df$total.Density[i]
+    temp_df = data.frame(Plot = plots, Group = group, DBH_Class = class, CBI = cbi, recruit.Density = tempval)
+    output_df2 = rbind(output_df2, temp_df)
+  }
+  
+}
 
 
 #length?
